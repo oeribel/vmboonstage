@@ -186,3 +186,43 @@ if __name__ == "__main__":
         vaknr += 1
         invoegenTekst(vak, vak, vaknr)
 ```
+## Invoegen tekst & cijfers vanuit 1 regel
+1. Voor de volgende regels maken weer een loopje en ook deze regel moeten we splitten
+    ```
+        for regelLeerlingEnCijfers in regels[1:]:
+            leerlingEnCijfers = regelLeerlingEnCijfers.split(";")
+            leerling = leerlingEnCijfers[0]
+            invoegenTekst(leerling, leerling)
+    ```
+2. Tekst positioneren
+    1. Methode invoegenTekst aanpassen
+        ```
+            def invoegenTekst(inTeVoegenTekst, naamTekst, posY = 1, posX = 0, rotZ=0, align = "LEFT"):
+                ...
+                obj.location = (posX, posY, 0)
+        ```
+    2. Aanroep van de methode invoegenTekst wijzigen
+        ```
+            leerlingNr = 0
+            for regelLeerlingEnCijfers in regels[1:]:
+                leerlingNr += 1
+                ...
+                invoegenTekst(leerling, leerling, 1, leerlingNr*-1)
+        ```
+3. Tekst roteren
+    1. Methode invoegenTekst aanpassen
+        ```
+        def invoegenTekst(inTeVoegenTekst, naamTekst, posY = 1, posX = 0, rotZ=0, align = "LEFT"):
+            tekst = bpy.data.curves.new(naamTekst, "FONT")
+            obj = bpy.data.objects.new(naamTekst, tekst)
+            obj.location = (posX, posY, 0)
+            obj.rotation_mode = 'XYZ'
+            obj.rotation_euler = (0, 0, rotZ)
+        ```
+    2. Aanroep van de methode invoegenTekst wijzigen
+        ```
+            invoegenTekst(leerling, leerling, 1, leerlingNr*-1, 1.5708)
+        ```
+
+> Voor meer informatie over het getal 1.5708 zie... :smile:  
+> [Hoeken van Euler](https://nl.wikipedia.org/wiki/Hoeken_van_Euler)

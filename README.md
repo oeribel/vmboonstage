@@ -197,7 +197,7 @@ if __name__ == "__main__":
 2. Tekst positioneren
     1. Methode invoegenTekst aanpassen
         ```
-            def invoegenTekst(inTeVoegenTekst, naamTekst, posY = 1, posX = 0, rotZ=0, align = "LEFT"):
+            def invoegenTekst(inTeVoegenTekst, naamTekst, posY = 1, posX = 0):
                 ...
                 obj.location = (posX, posY, 0)
         ```
@@ -212,10 +212,8 @@ if __name__ == "__main__":
 3. Tekst roteren
     1. Methode invoegenTekst aanpassen
         ```
-        def invoegenTekst(inTeVoegenTekst, naamTekst, posY = 1, posX = 0, rotZ=0, align = "LEFT"):
-            tekst = bpy.data.curves.new(naamTekst, "FONT")
-            obj = bpy.data.objects.new(naamTekst, tekst)
-            obj.location = (posX, posY, 0)
+        def invoegenTekst(inTeVoegenTekst, naamTekst, posY = 1, posX = 0, rotZ=0):
+            ...
             obj.rotation_mode = 'XYZ'
             obj.rotation_euler = (0, 0, rotZ)
         ```
@@ -224,5 +222,49 @@ if __name__ == "__main__":
             invoegenTekst(leerling, leerling, 1, leerlingNr*-1, 1.5708)
         ```
 
-> Voor meer informatie over het getal 1.5708 zie... :smile:  
-> [Hoeken van Euler](https://nl.wikipedia.org/wiki/Hoeken_van_Euler)
+        > Voor meer informatie over het getal 1.5708 zie...  
+        > [Hoeken van Euler](https://nl.wikipedia.org/wiki/Hoeken_van_Euler)  
+        > :smile:
+
+4. Tekst uitlijnen
+    1. Methode invoegenTekst aanpassen
+        ```
+        def invoegenTekst(inTeVoegenTekst, naamTekst, posY = 1, posX = 0, rotZ=0, align = "LEFT"):
+            ...
+            tekst.body = inTeVoegenTekst
+            tekst.align_x = align
+        ```
+    2. Aanroep van de methode invoegenTekst wijzigen
+        ```
+            invoegenTekst(leerling, leerling, 1, leerlingNr*-1, 1.5708, "RIGHT")
+        ```
+5.  Loop over de rest van de regel om de cijfers eruit te krijgen
+
+    ```
+    for cijfer in leerlingEnCijfers[1:]:
+        print(cijfer)
+    ```
+6. Maak een nieuwe methode om iets met de cijfers te doen
+    ```
+    def insertCijfer(cijferTekst):
+        print(cijfer)
+    ```
+
+### Python commando' s in Blender achterhalen
+> Nu willen wel een cylinder invoegen. Om erachter te komen hoe dit in Blender te doen is via Python gebruiken we het volgende trucje:
+> Ga met de muisaanwijzer naar een hoek van het pythonscherm in Blender. De muisaanwijzer wijzigt in een kruis. Zie afbeelding:
+> 
+> ![](./images/screenshot_2.png)
+>
+> Houdt de linkermuisknop ingedrukt en sleep omhoog. :tada: nieuw deelvenster. 
+> In dat nieuwe deelvenster clicken we op de dropdown in de linkerbovenhoek (kladblokje). En daarna clicken we op "info". Zie afbeelding:
+> 
+> ![](./images/screenshot_3.png)
+>
+> In dat venster druk :A: :a: 
+>
+> Alles wat we vanaf nu gaan doen wordt gelogd in het info venster
+
+In totaal hebben we dan dus:
+```
+```
